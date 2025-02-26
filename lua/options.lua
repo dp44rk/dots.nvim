@@ -33,6 +33,8 @@ if vim.fn.has("nvim-0.10") == 1 and vim.env.SSH_TTY then
   }
 end
 
+vim.cmd("filetype plugin on")
+o.compatible       = false
 o.cmdheight        = 2                           -- cmdline height
 o.cmdwinheight     = math.floor(vim.o.lines / 2) -- 'q:' window height
 o.scrolloff        = 3                           -- min number of lines to keep between cursor and screen edge

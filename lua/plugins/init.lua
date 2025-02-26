@@ -67,14 +67,14 @@ return {
     end,
     cmd = { "ColorizerAttachToBuffer", "ColorizerDetachFromBuffer" },
   },
-  {
-    "junegunn/fzf.vim",
-    enabled = true,
-    lazy = false,
-    dev = true,
-    -- windows doesn't have fzf runtime plugin
-    dependencies = require("utils")._if_win({ "junegunn/fzf" }, nil),
-  },
+  -- {
+  --   "junegunn/fzf.vim",
+  --   enabled = true,
+  --   lazy = false,
+  --   dev = true,
+  --   -- windows doesn't have fzf runtime plugin
+  --   dependencies = require("utils")._if_win({ "junegunn/fzf" }, nil),
+  -- },
   {
     "pwntester/octo.nvim",
     enabled = false,
@@ -103,5 +103,27 @@ return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = true
+  },
+  {"vimwiki/vimwiki",
+    lazy = false,
+    config = function()
+      vim.g.vimwiki_list = {
+        path = "/Users/parkdoyeon/wiki",
+        syntax = "default",
+        ext = ".md",
+        diary_rel_path = ".",
+      }
+    end,
+  },
+  {
+    "lervag/vimtex",
+    lazy = false,     -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here
+      vim.g.vimtex_view_method = "skim"
+      vim.g.vimtex_view_skim_sync = 1 -- Skim 동기화
+      vim.g.vimtex_view_skim_activate = 1 -- Skim 활성화
+    end
   }
 }

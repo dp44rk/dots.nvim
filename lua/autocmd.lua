@@ -301,3 +301,20 @@ augroup("ibhagwan/GQFormatter", function(g)
       end,
     })
 end)
+
+local function setup_autocmd_for_template()
+  local function onBufNewFile()
+    local filename = vim.fn.expand("<afile>:t:r")
+    if filename:match("^%d%d%d%d$") or filename:match("^%d%d%d%d%d$") then
+      vim.cmd("0r ~/.config/nvim/template/ps.cpp")
+    end
+  end
+  vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "*.cpp",
+    callback = onBufNewFile
+  })
+end
+
+-- 함수 호출하여 자동 명령 설정 적용
+setup_autocmd_for_template()
+
