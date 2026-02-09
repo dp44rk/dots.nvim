@@ -1,4 +1,4 @@
-local ok, lspconfig = pcall(require, "lspconfig")
+local ok, _ = pcall(require, "lspconfig")
 if not ok then return end
 
 -- Setup icons & handler helper functions
@@ -82,13 +82,24 @@ local all_servers = (function()
   return srv_tbl
 end)()
 
-local function is_installed(cfg)
-  local cmd = cfg.document_config
-      and cfg.document_config.default_config
-      and cfg.document_config.default_config.cmd
-      or nil
+local function server_config(name)
+  local cfg = vim.lsp.config[name]
+  if type(cfg) == "table" then
+    return cfg
+  end
+end
+
+local function is_installed(name)
+  local cfg = server_config(name)
+  if not cfg then
+    return false
+  end
+  local cmd = cfg.cmd
+  if type(cmd) == "function" then
+    cmd = cmd()
+  end
   -- server binary is executable within neovim's PATH
-  return cmd and cmd[1] and vim.fn.executable(cmd[1]) == 1
+  return type(cmd) == "table" and cmd[1] and vim.fn.executable(cmd[1]) == 1
 end
 
 local function make_config()
@@ -112,7 +123,8 @@ for _, srv in ipairs(all_servers) do
     cfg = vim.tbl_deep_extend("force", custom_settings[srv], cfg)
   end
   -- jdtls is configured via 'mfussenegger/nvim-jdtls'
-  if srv ~= "jdtls" and is_installed(lspconfig[srv]) then
-    lspconfig[srv].setup(cfg)
+  if srv ~= "jdtls" and is_installed(srv) then
+    vim.lsp.config(srv, cfg)
+    vim.lsp.enable(srv)
   end
 end

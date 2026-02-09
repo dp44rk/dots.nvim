@@ -7,10 +7,16 @@ local M = {
 
 M.config = function()
   -- If we do not wish to wait for timeoutlen
-  vim.keymap.set("v", "<Leader>?", "<Esc>:WhichKey '' v<CR>", { silent = true })
-  vim.keymap.set("n", "<Leader>?", "<Esc>:WhichKey '' n<CR>",
+  vim.keymap.set("v", "<Leader>?", function()
+    require("which-key").show({ mode = "v", keys = "<leader>" })
+  end, { silent = true })
+  vim.keymap.set("n", "<Leader>?", function()
+    require("which-key").show({ mode = "n", keys = "<leader>" })
+  end,
     { silent = true, desc = "which-key root" })
-  vim.keymap.set("n", "<Leader><Leader>", "<Esc>:WhichKey '' n<CR>",
+  vim.keymap.set("n", "<Leader><Leader>", function()
+    require("which-key").show({ mode = "n", keys = "<leader>" })
+  end,
     { silent = true, desc = "which-key root" })
 
   -- https://github.com/folke/which-key.nvim#colors

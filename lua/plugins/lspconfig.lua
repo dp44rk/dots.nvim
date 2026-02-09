@@ -4,6 +4,8 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = not require("utils").is_NetBSD() and { "lua_ls" } or nil,
+        -- We enable servers manually in `lua/lsp/init.lua`.
+        automatic_enable = false,
       })
     end
   },
