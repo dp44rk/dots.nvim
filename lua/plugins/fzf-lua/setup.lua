@@ -115,6 +115,24 @@ local default_opts = {
       vim.b.miniindentscope_disable = true
     end,
   },
+  keymap = {
+    -- Terminal environments on macOS often swallow Shift+Arrow.
+    -- Add reliable preview-scroll keys that work in both previewers.
+    builtin = {
+      [1] = true,
+      ["<C-d>"] = "preview-page-down",
+      ["<C-u>"] = "preview-page-up",
+      ["<C-j>"] = "preview-down",
+      ["<C-k>"] = "preview-up",
+    },
+    fzf = {
+      [1] = true,
+      ["ctrl-d"] = "preview-page-down",
+      ["ctrl-u"] = "preview-page-up",
+      ["ctrl-j"] = "preview-down",
+      ["ctrl-k"] = "preview-up",
+    },
+  },
   hls = function()
     return {
       border = hl_match({ "FloatBorder", "LineNr" }),

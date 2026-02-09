@@ -104,6 +104,15 @@ o.formatoptions    = o.formatoptions
 
 o.splitbelow       = true                   -- ':new' ':split' below current
 o.splitright       = true                   -- ':vnew' ':vsplit' right of current
+o.fillchars        = {
+  vert = "│",
+  horiz = "─",
+  vertleft = "┤",
+  vertright = "├",
+  verthoriz = "┼",
+  horizup = "┴",
+  horizdown = "┬",
+}
 
 o.foldenable       = true                   -- enable folding
 o.foldlevelstart   = 10                     -- open most folds by default

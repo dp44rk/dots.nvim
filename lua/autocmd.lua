@@ -55,6 +55,15 @@ augroup("ibhagwan/StatusLineColors", function(g)
     {
       group = g,
       callback = function(_)
+        local normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false }) or {}
+        local sep_fg = "#d39b2c"
+        vim.api.nvim_set_hl(0, "WinSeparator", {
+          fg = sep_fg,
+          bg = normal.bg,
+          bold = false,
+        })
+        vim.api.nvim_set_hl(0, "VertSplit", { link = "WinSeparator" })
+
         -- fix 'listchars' highlight on nightfly
         if vim.g.colors_name == "nightfly" then
           vim.api.nvim_set_hl(0, "Whitespace", { default = false, link = "NonText" })
