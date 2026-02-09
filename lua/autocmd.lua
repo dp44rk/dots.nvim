@@ -291,7 +291,7 @@ augroup("ibhagwan/GQFormatter", function(g)
     {
       group = g,
       callback = function(e)
-        -- execlude diffview and vim-fugitive
+        -- exclude diffview and vim-fugitive
         if vim.bo.filetype == "fugitive"
             or e.file:match("^fugitive:")
             or require("plugins.diffview")._is_open() then
@@ -317,4 +317,3 @@ end
 
 -- 함수 호출하여 자동 명령 설정 적용
 setup_autocmd_for_template()
-

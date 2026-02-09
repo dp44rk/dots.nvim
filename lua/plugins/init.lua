@@ -88,9 +88,10 @@ return {
     "stevearc/oil.nvim",
     opts = {},
     lazy = false,
-    -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    keys = {
+      { "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
+    },
   },
 
   {
@@ -104,14 +105,17 @@ return {
     event = "InsertEnter",
     config = true
   },
-  {"vimwiki/vimwiki",
+  {
+    "vimwiki/vimwiki",
     lazy = false,
     config = function()
       vim.g.vimwiki_list = {
-        path = "/Users/parkdoyeon/wiki",
-        syntax = "default",
-        ext = ".md",
-        diary_rel_path = ".",
+        {
+          path = "/Users/parkdoyeon/wiki",
+          syntax = "default",
+          ext = ".md",
+          diary_rel_path = ".",
+        },
       }
     end,
   },

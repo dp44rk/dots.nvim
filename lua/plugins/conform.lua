@@ -15,7 +15,7 @@ return {
     })
   end,
   _set_gq_keymap = function(e)
-    -- priortize LSP formatting as `gq`
+    -- prioritize LSP formatting as `gq`
     local lsp_has_formatting = false
     local lsp_clients = require("utils").lsp_get_clients({ bufnr = e.buf })
     local lsp_keymap_set = function(m, c)
@@ -27,7 +27,7 @@ return {
         desc = string.format("format document [LSP:%s]", c.name)
       })
     end
-    vim.tbl_map(function(c)
+    for _, c in ipairs(lsp_clients) do
       if c.supports_method("textDocument/rangeFormatting", { bufnr = e.buf }) then
         lsp_keymap_set("x", c)
         lsp_has_formatting = true
@@ -36,7 +36,7 @@ return {
         lsp_keymap_set("n", c)
         lsp_has_formatting = true
       end
-    end, lsp_clients)
+    end
     -- check conform.nvim for formatters:
     --   (1) if we have no LSP formatter map as `gq`
     --   (2) if LSP formatter exists, map as `gQ`

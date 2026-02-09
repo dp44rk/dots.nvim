@@ -107,7 +107,7 @@ M.config = function()
     { "g$", desc = "goto visual line end", mode = "n" },
     { "g8", desc = "print hex value under cursor", mode = "n" },
     { "g<lt>", desc = "display last !command output", mode = "n" },
-    { "g<C-G>", desc = "print current curosr pos info", mode = "n" },
+    { "g<C-G>", desc = "print current cursor pos info", mode = "n" },
     { "ga", desc = "print ascii value under cursor", mode = "n" },
     { "g_", desc = "goto last non-EOL char", mode = "n" },
     { "gt", desc = "goto next tab", mode = "n" },
