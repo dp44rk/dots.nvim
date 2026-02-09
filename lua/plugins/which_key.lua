@@ -20,7 +20,7 @@ M.config = function()
   vim.cmd([[highlight default link WhichKeyValue     Comment]])
 
   local wk = require("which-key")
-  wk.setup {
+  wk.setup({
     plugins = {
       marks = true,      -- shows a list of your marks on ' and `
       registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -31,7 +31,7 @@ M.config = function()
         suggestions = 20 -- how many suggestions should be shown in the list?
       },
       presets = {
-        operators = false,    -- adds help for operators like d, y, ...
+        operators = false,    -- adds help for operators like d, y, ... (deprecated in this config)
         motions = false,      -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
         windows = true,       -- default bindings on <c-w>
@@ -40,111 +40,98 @@ M.config = function()
         g = true              -- bindings for prefixed with g
       }
     },
-    -- add operators that will trigger motion and text object completion
-    -- to enable all native operators, set the preset / operators plugin above
-    operators = { gc = "Comments" },
-    key_labels = {
-      -- override the label used to display some keys. It doesn't effect WK in any other way.
-      -- For example:
-      ["<space>"] = "SPC",
-      ["<cr>"] = "RET",
-      ["<tab>"] = "TAB"
+    replace = {
+      key = {
+        { "<space>", "SPC" },
+        { "<cr>", "RET" },
+        { "<tab>", "TAB" },
+      },
+      desc = {
+        { "<silent>", "" },
+        { "<cmd>", "" },
+        { "<Cmd>", "" },
+        { "<CR>", "" },
+        { "^call%s+", "" },
+        { "^lua%s+", "" },
+        { "^:%s*", "" },
+      }
     },
     icons = {
       breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
       separator = "➜", -- symbol used between a key and it's label
       group = "+" -- symbol prepended to a group
     },
-    window = {
+    win = {
       border = "none",         -- none, single, double, shadow
-      position = "bottom",     -- bottom, top
-      margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-      padding = { 1, 1, 1, 1 } -- extra window padding [top, right, bottom, left]
+      title = false,
+      padding = { 1, 1, 1, 1 } -- extra window padding [top/bottom, right/left]
     },
     layout = {
-      height = { min = 4, max = 25 }, -- min and max height of the columns
       width = { min = 20, max = 50 }, -- min and max width of the columns
-      spacing = 5                     -- spacing between columns
+      spacing = 5,                    -- spacing between columns
     },
-    -- hide mapping boilerplate
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
     show_help = true, -- show help message on the command line when the popup is visible
-    triggers = "auto" -- automatically setup triggers
+    triggers = {
+      { "<auto>", mode = "nixsotc" },
+    },
     -- triggers = {"<leader>"} -- or specifiy a list manually
-  }
-
-  local opts = {
-    mode = "n",     -- NORMAL mode
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false  -- use `nowait` when creating keymaps
-  }
+  })
 
   local keymaps = {
-    ["%"]        = "cycle through matchit group",
-    ["<CR>"]     = "treesitter incremental selection",
+    { "%", desc = "cycle through matchit group", mode = "n" },
+    { "<CR>", desc = "treesitter incremental selection", mode = "n" },
     -- dup DAP descriptons due to plugin lazy load
-    ["<F5>"]     = "DAP launch or continue",
-    ["<F8>"]     = "DAP toggle UI",
-    ["<F9>"]     = "DAP toggle breakpoint",
-    ["<F10>"]    = "DAP step over",
-    ["<F11>"]    = "DAP step into",
-    ["<F12>"]    = "DAP step out",
-    ["<C-\\>"]   = "Launch scratch terminal",
-    ["<C-l>"]    = "Clear and redraw screen",
-    ["<C-r>"]    = "Redo",
-    ["u"]        = "Undo",
-    ["U"]        = "Undo line",
-    ["."]        = "Repeat last edit",
-    ["["]        = {
-      ["]"] = "Previous class/object start",
-      ["["] = "Previous class/object end",
-    },
-    ["]"]        = {
-      ["]"] = "Next class/object start",
-      ["["] = "Next class/object end",
-    },
-    ["g"]        = {
-      -- builtin commands
-      ["%"] = "goto previous matching group",
-      ["0"] = "goto visual line start",
-      ["$"] = "goto visual line end",
-      ["8"] = "print hex value under cursor",
-      ["<lt>"] = "display last !command output",
-      ["<C-G>"] = "print current curosr pos info",
-      a = "print ascii value under cursor",
-      _ = "goto last non-EOL char",
-      t = "goto next tab",
-      T = "goto prev tab",
-      -- overridden by LSP keybinds
-      -- m = { 'gm', 'goto middle of screen line' },
-      M = "goto middle of text line",
-      F = "goto file:line under cursor",
-      E = "previous end of WORD",
-    },
-    ["<leader>"] = {
-      g = { name = "+git", },
-      G = { name = "+git", },
-      f = { name = "+fzf", },
-      l = { name = "+lsp", },
-      L = { name = "+Lsp", },
-      d = { name = "+dap" },
-      y = { name = "+yadm", },
-      h = { name = "+gitsigns", },
-      t = {
-        name = "+telescope",
-        l = { name = "+lsp" }
-      },
-      e = {
-        name = "+tree",
-        e = { ":NvimTreeToggle<CR>", "nvim-tree on/off" },
-        f = { ":NvimTreeFindFileToggle<CR>", "nvim-tree current file" },
-      },
-    },
+    { "<F5>", desc = "DAP launch or continue", mode = "n" },
+    { "<F8>", desc = "DAP toggle UI", mode = "n" },
+    { "<F9>", desc = "DAP toggle breakpoint", mode = "n" },
+    { "<F10>", desc = "DAP step over", mode = "n" },
+    { "<F11>", desc = "DAP step into", mode = "n" },
+    { "<F12>", desc = "DAP step out", mode = "n" },
+    { "<C-\\>", desc = "Launch scratch terminal", mode = "n" },
+    { "<C-l>", desc = "Clear and redraw screen", mode = "n" },
+    { "<C-r>", desc = "Redo", mode = "n" },
+    { "u", desc = "Undo", mode = "n" },
+    { "U", desc = "Undo line", mode = "n" },
+    { ".", desc = "Repeat last edit", mode = "n" },
+
+    { "[", group = "previous", mode = "n" },
+    { "[]", desc = "Previous class/object start", mode = "n" },
+    { "[[", desc = "Previous class/object end", mode = "n" },
+    { "]", group = "next", mode = "n" },
+    { "]]", desc = "Next class/object start", mode = "n" },
+    { "][", desc = "Next class/object end", mode = "n" },
+
+    { "g", group = "goto", mode = "n" },
+    { "g%", desc = "goto previous matching group", mode = "n" },
+    { "g0", desc = "goto visual line start", mode = "n" },
+    { "g$", desc = "goto visual line end", mode = "n" },
+    { "g8", desc = "print hex value under cursor", mode = "n" },
+    { "g<lt>", desc = "display last !command output", mode = "n" },
+    { "g<C-G>", desc = "print current curosr pos info", mode = "n" },
+    { "ga", desc = "print ascii value under cursor", mode = "n" },
+    { "g_", desc = "goto last non-EOL char", mode = "n" },
+    { "gt", desc = "goto next tab", mode = "n" },
+    { "gT", desc = "goto prev tab", mode = "n" },
+    { "gM", desc = "goto middle of text line", mode = "n" },
+    { "gF", desc = "goto file:line under cursor", mode = "n" },
+    { "gE", desc = "previous end of WORD", mode = "n" },
+
+    { "<leader>g", group = "git", mode = "n" },
+    { "<leader>G", group = "git", mode = "n" },
+    { "<leader>f", group = "fzf", mode = "n" },
+    { "<leader>l", group = "lsp", mode = "n" },
+    { "<leader>L", group = "Lsp", mode = "n" },
+    { "<leader>d", group = "dap", mode = "n" },
+    { "<leader>y", group = "yadm", mode = "n" },
+    { "<leader>h", group = "gitsigns", mode = "n" },
+    { "<leader>t", group = "telescope", mode = "n" },
+    { "<leader>tl", group = "lsp", mode = "n" },
+    { "<leader>e", group = "tree", mode = "n" },
+    { "<leader>ee", desc = "nvim-tree on/off", mode = "n" },
+    { "<leader>ef", desc = "nvim-tree current file", mode = "n" },
   }
 
-  wk.register(keymaps, opts)
+  wk.add(keymaps)
 end
 
 return M

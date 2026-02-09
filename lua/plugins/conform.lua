@@ -5,11 +5,11 @@ return {
     require("conform").setup({
       formatters_by_ft = {
         lua = { "stylua" },
-        css = { { "prettier", "prettierd" } },
-        html = { { "prettier", "prettierd" } },
-        yaml = { { "prettier", "prettierd" } },
-        jsonc = { { "prettier", "prettierd" } },
-        javascript = { { "prettier", "prettierd" } },
+        css = { "prettierd", "prettier", stop_after_first = true },
+        html = { "prettierd", "prettier", stop_after_first = true },
+        yaml = { "prettierd", "prettier", stop_after_first = true },
+        jsonc = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
         python = { "black" },
       },
     })
