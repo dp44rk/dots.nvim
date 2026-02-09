@@ -76,15 +76,6 @@ return {
   --   dependencies = require("utils")._if_win({ "junegunn/fzf" }, nil),
   -- },
   {
-    "pwntester/octo.nvim",
-    enabled = false,
-    lazy = false,
-    dev = true,
-    config = function()
-      require "octo".setup({ picker = "fzf-lua" })
-    end
-  },
-  {
     "stevearc/oil.nvim",
     opts = {},
     lazy = false,

@@ -67,7 +67,6 @@ local default_opts = {
   "default-title",
   -- nvim_freeze_workaround = 1,
   -- debug_tracelog = "~/fzf-lua-trace.log",
-  -- fzf_opts = { ["--info"] = "default" },
   fzf_colors = function()
     return {
       -- Set to `-1` to use neovim fg/bg, from `man fzf`:
