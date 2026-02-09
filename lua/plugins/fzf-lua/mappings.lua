@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 local map_fzf = function(mode, key, f, options, buffer)
   local desc = nil
   if type(options) == "table" then
@@ -7,21 +5,6 @@ local map_fzf = function(mode, key, f, options, buffer)
     options.desc = nil
   elseif type(options) == "function" then
     desc = options().desc
-  end
-
-  if utils.SWITCH_TELE then
-    for _, k in ipairs({ "f", "l", "g" }) do
-      key = key:gsub("<leader>" .. k, "<leader>" .. string.upper(k))
-    end
-    for _, k in ipairs({ "<F1>", "<c-P>", "<c-K>" }) do
-      if key == k then
-        key = "<leader>" .. k
-      end
-    end
-    -- remap buffers
-    if key == "<leader>," then
-      key = "<leader>;"
-    end
   end
 
   local rhs = function()

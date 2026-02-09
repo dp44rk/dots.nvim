@@ -10,6 +10,8 @@ M.config = function()
   vim.keymap.set("v", "<Leader>?", "<Esc>:WhichKey '' v<CR>", { silent = true })
   vim.keymap.set("n", "<Leader>?", "<Esc>:WhichKey '' n<CR>",
     { silent = true, desc = "which-key root" })
+  vim.keymap.set("n", "<Leader><Leader>", "<Esc>:WhichKey '' n<CR>",
+    { silent = true, desc = "which-key root" })
 
   -- https://github.com/folke/which-key.nvim#colors
   vim.cmd([[highlight default link WhichKey          Label]])
@@ -124,7 +126,7 @@ M.config = function()
     { "<leader>d", group = "dap", mode = "n" },
     { "<leader>y", group = "yadm", mode = "n" },
     { "<leader>h", group = "gitsigns", mode = "n" },
-    { "<leader>t", group = "telescope", mode = "n" },
+    { "<leader>t", group = "test", mode = "n" },
     { "<leader>tl", group = "lsp", mode = "n" },
     { "<leader>e", group = "tree", mode = "n" },
     { "<leader>ee", desc = "nvim-tree on/off", mode = "n" },

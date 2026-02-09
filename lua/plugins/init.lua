@@ -17,7 +17,7 @@ return {
     event = "VeryLazy",
     dev = require("utils").is_dev("smartyank.nvim")
   },
-  -- plenary is required by gitsigns and telescope
+  -- plenary is required by multiple plugins (e.g. gitsigns)
   {
     "nvim-lua/plenary.nvim",
     keys = { "<leader>tt", "<leader>td" },

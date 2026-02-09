@@ -34,7 +34,6 @@
 - subdirectories:
   - `dap/`: debugger modules
   - `fzf-lua/`: picker setup/mappings/cmd wrappers
-  - `telescope/`: telescope setup/mappings/cmd wrappers
   - `heirline/`: statusline components
   - `mini/`, `devicons/`, `term/`: grouped plugin configs
 

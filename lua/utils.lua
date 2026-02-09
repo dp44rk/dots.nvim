@@ -15,10 +15,6 @@ M.__HAS_NVIM_010 = vim.fn.has("nvim-0.10") == 1
 M.__HAS_NVIM_011 = vim.fn.has("nvim-0.11") == 1
 M.IS_WINDOWS = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 
--- muscle memory: switch Telescope<->fzf-lua binds
--- while I'm actively developing fzf-lua for windows
-M.SWITCH_TELE = M.IS_WINDOWS
-
 M._if_win = function(a, b)
   if M.IS_WINDOWS then
     return a

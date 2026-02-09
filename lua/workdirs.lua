@@ -27,7 +27,6 @@ M.DIRS = {
   utils._if_win_fs_norm("~/Sources/nvim/smartyank.nvim"),
   utils._if_win_fs_norm("~/Sources/nvim/vim-cheatsheet"),
   utils._if_win_fs_norm("~/Sources/nvim/plenary.nvim"),
-  utils._if_win_fs_norm("~/Sources/nvim/telescope.nvim"),
   utils._if_win_fs_norm("~/Sources/reveal.js"),
 }
 
